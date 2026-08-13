@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Iván García — Technical Director, Mobile &amp; AI</title>
+<meta name="description" content="Portfolio of Iván Felipe García Sánchez, Technical Director at Globant specializing in mobile engineering and applied AI." />
+<style>
+
+  /* ---------- Tokens ---------- */
+  :root{
+    --bg: #F5F6F8;
+    --surface: #FFFFFF;
+    --surface-alt: #ECEEF2;
+    --text: #12151B;
+    --text-muted: #5B6270;
+    --border: #D8DBE1;
+    --accent: #1D4E89;
+    --accent-strong: #143A68;
+    --accent-soft: rgba(29,78,137,0.10);
+    --shadow: 0 1px 2px rgba(18,21,27,0.04), 0 8px 24px rgba(18,21,27,0.05);
+
+    --font-display: -apple-system, "SF Pro Display", "Segoe UI Semibold", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-body: -apple-system, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+
+    --measure: 62ch;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #0E141C;
+      --surface: #141B26;
+      --surface-alt: #1B2430;
+      --text: #E7EBF2;
+      --text-muted: #9AA4B2;
+      --border: #2A3441;
+      --accent: #6FA3F5;
+      --accent-strong: #9CC0FF;
+      --accent-soft: rgba(111,163,245,0.14);
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 32px rgba(0,0,0,0.35);
+    }
+  }
+
+  :root[data-theme="dark"]{
+    --bg: #0E141C;
+    --surface: #141B26;
+    --surface-alt: #1B2430;
+    --text: #E7EBF2;
+    --text-muted: #9AA4B2;
+    --border: #2A3441;
+    --accent: #6FA3F5;
+    --accent-strong: #9CC0FF;
+    --accent-soft: rgba(111,163,245,0.14);
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 32px rgba(0,0,0,0.35);
+  }
+
+  /* ---------- Reset ---------- */
+  *, *::before, *::after{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *, *::before, *::after{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  }
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3{ font-family: var(--font-display); margin: 0; text-wrap: balance; }
+  p{ margin: 0; }
+  a{ color: inherit; }
+  ul{ margin: 0; padding: 0; list-style: none; }
+  img,svg{ display:block; max-width:100%; }
+  :focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap{
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- Nav ---------- */
+  header.site{
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+  }
+  .nav-mark{
+    font-family: var(--font-mono);
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+  }
+  .nav-mark span{ color: var(--accent); }
+  .nav-links{
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .nav-links a{
+    text-decoration: none;
+    font-size: 14px;
+    color: var(--text-muted);
+    transition: color 0.15s ease;
+  }
+  .nav-links a:hover{ color: var(--text); }
+  .theme-toggle{
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .theme-toggle:hover{ border-color: var(--accent); }
+  .theme-toggle svg{ width: 16px; height: 16px; }
+  .nav-toggle{
+    display: none;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 720px){
+    .nav-links{
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 28px 26px;
+      display: none;
+    }
+    .nav-links.open{ display: flex; }
+    .nav-toggle{ display: inline-flex; align-items:center; justify-content:center; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding: 96px 0 80px;
+    border-bottom: 1px solid var(--border);
+  }
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    margin-bottom: 18px;
+    display: block;
+  }
+  .hero h1{
+    font-size: clamp(38px, 6vw, 60px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .hero .role{
+    margin-top: 14px;
+    font-size: clamp(17px, 2vw, 20px);
+    color: var(--text-muted);
+    max-width: 46ch;
+  }
+  .hero .lede{
+    margin-top: 24px;
+    max-width: var(--measure);
+    color: var(--text-muted);
+    font-size: 16.5px;
+  }
+  .cta-row{
+    margin-top: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: 10px;
+    font-size: 14.5px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+  .btn:hover{ transform: translateY(-1px); }
+  .btn-ios{ background: var(--text); color: var(--bg); }
+  :root:not([data-theme="light"]) .btn-ios{ background: var(--text); color: var(--bg); }
+  .btn-android{ background: transparent; color: var(--text); border-color: var(--border); }
+  .btn-android:hover{ border-color: var(--accent); }
+  .btn-ghost{ background: transparent; color: var(--text-muted); border-color: var(--border); }
+  .btn-ghost:hover{ color: var(--text); border-color: var(--accent); }
+  .btn svg{ width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* ---------- Sections ---------- */
+  section{ padding: 76px 0; border-bottom: 1px solid var(--border); }
+  section:last-of-type{ border-bottom: none; }
+  .section-head{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+  .section-head h2{
+    font-size: 26px;
+    letter-spacing: -0.01em;
+  }
+  .section-num{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .reveal{ opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal.in{ opacity: 1; transform: none; }
+
+  /* About */
+  .about-grid{
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 48px;
+  }
+  .about-grid p{ color: var(--text-muted); max-width: var(--measure); }
+  .about-grid p + p{ margin-top: 16px; }
+  .fact-list{ display: flex; flex-direction: column; gap: 18px; }
+  .fact{
+    border-left: 2px solid var(--border);
+    padding-left: 16px;
+  }
+  .fact dt{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0 0 4px;
+  }
+  .fact dd{ margin: 0; font-size: 14.5px; }
+
+  @media (max-width: 780px){
+    .about-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* Experience timeline */
+  .timeline{ display: flex; flex-direction: column; }
+  .tl-item{
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 24px;
+    padding: 26px 0;
+    border-top: 1px solid var(--border);
+  }
+  .tl-item:first-child{ border-top: none; padding-top: 0; }
+  .tl-date{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--accent);
+    padding-top: 3px;
+  }
+  .tl-role{ font-size: 17px; font-weight: 600; }
+  .tl-org{ font-size: 14px; color: var(--text-muted); margin-top: 2px; }
+  .tl-desc{ margin-top: 10px; color: var(--text-muted); font-size: 14.5px; max-width: var(--measure); }
+  .tl-tags{ display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .tl-tags span{
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: var(--surface-alt);
+    color: var(--text-muted);
+  }
+  .tl-group-label{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 44px 0 4px;
+  }
+  .tl-group-label:first-child{ margin-top: 0; }
+
+  @media (max-width: 620px){
+    .tl-item{ grid-template-columns: 1fr; gap: 6px; }
+  }
+
+  /* Skills */
+  .skill-groups{ display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px 48px; }
+  .skill-group h3{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .chip-row{ display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip{
+    font-size: 13.5px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+  }
+  @media (max-width: 620px){
+    .skill-groups{ grid-template-columns: 1fr; }
+  }
+
+  /* Apps: iOS / Android */
+  .apps-sub{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 0 0 22px;
+  }
+  .apps-sub + .app-grid + .apps-sub,
+  section#apps .apps-sub ~ .apps-sub{ margin-top: 56px; }
+  .apps-sub h3{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .apps-sub a{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .apps-sub a:hover{ text-decoration: underline; }
+
+  .app-grid{ display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  @media (max-width: 780px){ .app-grid{ grid-template-columns: 1fr; } }
+
+  .app-card{
+    display: flex;
+    gap: 16px;
+    padding: 22px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+  .app-icon{
+    width: 60px; height: 60px;
+    border-radius: 16px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+  }
+  .app-body{ display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .app-name-row{ display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .app-body h4{ font-size: 16px; font-family: var(--font-display); }
+  .app-tagline{ font-size: 12.5px; color: var(--accent); font-family: var(--font-mono); }
+  .app-desc{ font-size: 13.5px; color: var(--text-muted); }
+  .app-links{ margin-top: auto; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; padding-top: 8px; }
+  .app-links a{ font-family: var(--font-mono); font-size: 12px; color: var(--accent); text-decoration: none; }
+  .app-links a:hover{ text-decoration: underline; }
+  .cross-chip{
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+
+  /* Archive */
+  .archive-grid{ display: flex; flex-direction: column; gap: 20px; }
+  .archive-card{
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 26px;
+    padding: 26px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface);
+  }
+  @media (max-width: 700px){ .archive-card{ grid-template-columns: 1fr; } }
+  .shot-frame{
+    position: relative;
+    height: 220px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface-alt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .shot-frame img{
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: contain;
+    padding: 10px;
+  }
+  .shot-fallback{
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 16px;
+    line-height: 1.6;
+  }
+  .archive-name-row{ display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .archive-meta{ font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+  .archive-desc{ color: var(--text-muted); font-size: 14px; margin-top: 12px; max-width: var(--measure); }
+  .archive-quote{ font-style: italic; color: var(--text-muted); font-size: 13px; margin-top: 10px; }
+  .archive-links{ margin-top: 14px; display: flex; gap: 14px; }
+  .archive-links a{ font-family: var(--font-mono); font-size: 12px; color: var(--accent); text-decoration: none; }
+  .archive-links a:hover{ text-decoration: underline; }
+
+  /* Education / languages */
+  .edu-grid{ display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; }
+  .edu-item + .edu-item{ margin-top: 22px; }
+  .edu-item .deg{ font-weight: 600; font-size: 15px; }
+  .edu-item .school{ color: var(--text-muted); font-size: 14px; margin-top: 2px; }
+  .edu-item .when{ font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+  .lang-list{ display: flex; flex-direction: column; gap: 14px; }
+  .lang-row{ display: flex; align-items: center; justify-content: space-between; font-size: 14.5px; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
+  .lang-row:last-child{ border-bottom: none; }
+  .lang-level{ font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
+  @media (max-width: 780px){ .edu-grid{ grid-template-columns: 1fr; } }
+
+  /* Footer */
+  footer{
+    padding: 56px 0 64px;
+  }
+  .footer-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  footer h2{ font-size: 24px; margin-bottom: 10px; }
+  footer p{ color: var(--text-muted); font-size: 14.5px; }
+  .footer-meta{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--text-muted);
+    text-align: right;
+  }
+  .footer-meta a{ color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a href="#top" class="nav-mark">GARCIA<span>.</span>DEV</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#apps">Apps</a>
+      <a href="#archive">Archive</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme">
+        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow reveal">MIAMI, FL — AVAILABLE FOR ADVISORY &amp; SPEAKING</span>
+      <h1 class="reveal">Iván García</h1>
+      <p class="role reveal">Technical Director at Globant, building native mobile experiences and applied‑AI products for 13+ years.</p>
+      <p class="lede reveal">Systems engineer with a master's in software engineering. I lead cross‑border engineering teams and translate executive vision into shipped platforms — most recently architecting LLM and knowledge‑graph solutions on top of a decade of native iOS leadership.</p>
+      <div class="cta-row reveal">
+        <a class="btn btn-ios" href="https://apps.apple.com/do/developer/ivan-f-garcia-s/id847804685" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.365 1.43c0 1.14-.462 2.032-1.386 2.834-.99.87-2.037 1.36-3.14 1.264-.09-1.1.397-2.17 1.36-3.03.965-.85 2.05-1.35 3.166-1.418.02.117.03.234 0 .35zM20.6 17.24c-.457 1.05-.99 2.02-1.6 2.94-.84 1.26-1.53 2.13-2.06 2.62-.82.79-1.7 1.19-2.64 1.21-.68.02-1.5-.19-2.46-.63-.96-.44-1.84-.66-2.66-.66-.86 0-1.77.22-2.73.66-.97.44-1.75.67-2.35.69-.9.04-1.8-.37-2.7-1.22-.58-.53-1.31-1.44-2.18-2.72-.93-1.36-1.69-2.94-2.28-4.74-.63-1.93-.95-3.79-.95-5.6 0-2.07.45-3.86 1.34-5.35.7-1.2 1.63-2.15 2.8-2.84 1.16-.7 2.42-1.06 3.78-1.08.72 0 1.68.24 2.87.71 1.19.47 1.95.71 2.28.71.25 0 1.09-.28 2.51-.83 1.35-.51 2.48-.72 3.42-.64 2.53.2 4.43 1.2 5.7 3-2.26 1.37-3.38 3.28-3.36 5.73.02 1.9.7 3.49 2.03 4.75.6.58 1.28 1.03 2.02 1.35-.16.47-.34.93-.53 1.38z"/></svg>
+          iOS Portfolio
+        </a>
+        <a class="btn btn-android" href="https://play.google.com/store/apps/developer?id=Ivan+F+Garcia" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.7c-.35.35-.55.85-.55 1.4v15.8c0 .55.2 1.05.55 1.4l.1.08L13 12.1v-.2L3.7 2.62l-.1.08z"/><path d="M16.1 15.3l-3.1-3.1v-.2l3.1-3.1 3.5 2c1 .57 1 1.5 0 2.07l-3.5 2.33z" opacity=".85"/><path d="M16.1 8.9L12.9 12l3.2 3.1 3.5-2.33c1-.57 1-1.5 0-2.07L16.1 8.9z" opacity=".6"/><path d="M4 20.9c.3.16.7.13 1.1-.1l10.9-6.2-2.9-2.9L4 20.9z" opacity=".9"/></svg>
+          Android Portfolio
+        </a>
+        <a class="btn btn-ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>About</h2>
+        <span class="section-num">01</span>
+      </div>
+      <div class="about-grid">
+        <div class="reveal">
+          <p>Technical Director leading digital strategy for one of Globant's largest accounts, overseeing seven business pillars — Customer Journey, Commerce, Growth &amp; Innovation, Onboard Revenue, Loyalty, Operations, and Crew — across a 70+ engineer organization spanning Latin America, India, and the U.S.</p>
+          <p>Started as the first iOS developer on the account in 2017 and grew into architecture and technical leadership, most recently delivering AI‑powered pricing, recommendation, and innovation tooling built on LLMs and knowledge graphs.</p>
+        </div>
+        <dl class="fact-list reveal">
+          <div class="fact">
+            <dt>Experience</dt>
+            <dd>13+ years in software development</dd>
+          </div>
+          <div class="fact">
+            <dt>Focus</dt>
+            <dd>Mobile architecture, engineering leadership, applied AI</dd>
+          </div>
+          <div class="fact">
+            <dt>Education</dt>
+            <dd>MSc Software Engineering, Universidad de los Andes</dd>
+          </div>
+          <div class="fact">
+            <dt>Based in</dt>
+            <dd>Miami, FL</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Experience</h2>
+        <span class="section-num">02</span>
+      </div>
+
+      <p class="tl-group-label reveal">Globant — Royal Caribbean Digital</p>
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <div class="tl-date">Feb 2025 — Present</div>
+          <div>
+            <div class="tl-role">Technical Director</div>
+            <div class="tl-org">Globant, Miami</div>
+            <p class="tl-desc">Own the digital strategy and innovation roadmap across seven business pillars. Lead executive‑level stakeholder negotiations and program governance for Future Cruise 2.0, Royal Up Enhancements, and the AI Pricing &amp; Recommendations / Sparkbot initiatives.</p>
+            <div class="tl-tags"><span>Strategy</span><span>OKRs</span><span>AI Governance</span></div>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-date">Feb 2022 — Feb 2025</div>
+          <div>
+            <div class="tl-role">Technical Manager</div>
+            <div class="tl-org">Globant, Miami</div>
+            <p class="tl-desc">Directed a 70+ engineer organization across LATAM, India, and the U.S. Shipped Marketplace, Home, Media Network, In‑App Cart, eWaivers, Guest Wallet, and Apple Pay integration across the full guest journey.</p>
+            <div class="tl-tags"><span>Staffing</span><span>RFI/RFP</span><span>Architecture</span></div>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-date">Feb 2021 — Feb 2022</div>
+          <div>
+            <div class="tl-role">Software Architect &amp; Technical Leader</div>
+            <div class="tl-org">Globant, Miami</div>
+            <p class="tl-desc">Drove architecture for post‑COVID initiatives including the Muster safety‑drill feature, Next Cruise, Kids Club registration, Virtual Queueing, and Seamless Wi‑Fi.</p>
+            <div class="tl-tags"><span>Architecture</span><span>Roadmap</span></div>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-date">May 2019 — Feb 2021</div>
+          <div>
+            <div class="tl-role">Software Designer, Technical Lead</div>
+            <div class="tl-org">Globant — Royal Caribbean Excalibur</div>
+            <p class="tl-desc">Selected for the elite KTLO stabilization team during COVID‑19. Managed the iOS team, designed Guest‑to‑Guest Chat, and contributed to AI‑driven Guest Services Chat and the Virtual Concierge platform.</p>
+            <div class="tl-tags"><span>iOS Leadership</span><span>AI Chat</span></div>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-date">Feb 2018 — May 2019</div>
+          <div>
+            <div class="tl-role">Senior iOS Mobile Developer</div>
+            <div class="tl-org">Globant — Royal Caribbean Excalibur</div>
+            <p class="tl-desc">Led Guest Account and Check‑In, digitizing check‑in and boarding pass generation. Led iOS development on Commerce, enabling onboard booking across app, web, and kiosk.</p>
+            <div class="tl-tags"><span>Swift</span><span>Scrum</span></div>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-date">Feb 2017 — Feb 2018</div>
+          <div>
+            <div class="tl-role">Ssr Adv iOS Mobile Developer</div>
+            <div class="tl-org">Globant — Royal Caribbean Excalibur</div>
+            <p class="tl-desc">Joined at the inception of Royal Caribbean's mobile app. Built the Core and Itinerary foundation and led the Guest Account &amp; Check‑In experience to launch.</p>
+            <div class="tl-tags"><span>Swift</span><span>Objective‑C</span></div>
+          </div>
+        </div>
+      </div>
+
+      <p class="tl-group-label reveal">Earlier roles</p>
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <div class="tl-date">Feb 2016 — Feb 2017</div>
+          <div>
+            <div class="tl-role">iOS Developer</div>
+            <div class="tl-org">YellowPepper, Bogotá</div>
+            <p class="tl-desc">Built and maintained mobile banking apps for Grupo Aval, Banco Pichincha, Colpatria, Diners, and CorpBanca, working within security frameworks for financial software.</p>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-date">Jun 2015 — Feb 2016</div>
+          <div>
+            <div class="tl-role">iOS Developer</div>
+            <div class="tl-org">Mercadoni, Bogotá</div>
+            <p class="tl-desc">First iOS developer on a grocery‑delivery app built from scratch in Objective‑C; guided the developers who joined after.</p>
+          </div>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-date">Dec 2013 — May 2015</div>
+          <div>
+            <div class="tl-role">iOS Jr. Developer</div>
+            <div class="tl-org">Tappsi, Bogotá</div>
+            <p class="tl-desc">Built and shipped features for a taxi‑booking app that grew past 1M downloads during his tenure.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Skills</h2>
+        <span class="section-num">03</span>
+      </div>
+      <div class="skill-groups">
+        <div class="skill-group reveal">
+          <h3>Mobile &amp; Languages</h3>
+          <div class="chip-row">
+            <span class="chip">Swift</span><span class="chip">SwiftUI</span><span class="chip">Objective‑C</span><span class="chip">Java</span><span class="chip">JavaScript</span><span class="chip">Python</span><span class="chip">HTML</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <h3>AI &amp; Data</h3>
+          <div class="chip-row">
+            <span class="chip">AI Model Deployment &amp; Management</span><span class="chip">RAG</span><span class="chip">NLP</span><span class="chip">MySQL</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <h3>Engineering</h3>
+          <div class="chip-row">
+            <span class="chip">Architecture Patterns</span><span class="chip">Algorithms &amp; Data Structures</span><span class="chip">Threading</span><span class="chip">REST</span><span class="chip">Postman</span><span class="chip">Analytics</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <h3>Leadership &amp; Process</h3>
+          <div class="chip-row">
+            <span class="chip">Team Leadership</span><span class="chip">Stakeholder Management</span><span class="chip">Scrum</span><span class="chip">Kanban</span><span class="chip">Jira</span><span class="chip">Git</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="apps">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Apps</h2>
+        <span class="section-num">04</span>
+      </div>
+
+      <div class="apps-sub reveal">
+        <h3>iOS — App Store</h3>
+        <a href="https://apps.apple.com/do/developer/ivan-f-garcia-s/id847804685" target="_blank" rel="noopener">All apps on the App Store ↗</a>
+      </div>
+      <div class="app-grid">
+        <div class="app-card reveal">
+          <img class="app-icon" src="assets/icons/agentic-pets-ios.jpg" alt="Agentic Pets icon" loading="lazy">
+          <div class="app-body">
+            <div class="app-name-row"><h4>Agentic Pets</h4><span class="cross-chip">Also on Android</span></div>
+            <span class="app-tagline">Identify breeds and check health with one photo</span>
+            <p class="app-desc">AI‑powered pet care: instant breed identification, general health indicators, and personalized recommendations from a single photo.</p>
+            <div class="app-links"><a href="https://apps.apple.com/us/app/agentic-pets/id6756983604" target="_blank" rel="noopener">View on App Store ↗</a></div>
+          </div>
+        </div>
+        <div class="app-card reveal">
+          <img class="app-icon" src="assets/icons/faith-guide.jpg" alt="Faith Guide icon" loading="lazy">
+          <div class="app-body">
+            <div class="app-name-row"><h4>Faith Guide</h4></div>
+            <span class="app-tagline">Your daily faith companion</span>
+            <p class="app-desc">Daily devotionals, Scripture reflections, and guided prayer, plus a compassionate AI companion for faith‑centered conversations.</p>
+            <div class="app-links"><a href="https://apps.apple.com/us/app/faith-guide/id6746705244" target="_blank" rel="noopener">View on App Store ↗</a></div>
+          </div>
+        </div>
+        <div class="app-card reveal">
+          <img class="app-icon" src="assets/icons/agentic-bots-ios.jpg" alt="Agentic Bots icon" loading="lazy">
+          <div class="app-body">
+            <div class="app-name-row"><h4>Agentic Bots</h4><span class="cross-chip">Also on Android</span></div>
+            <span class="app-tagline">Your personal AI experts</span>
+            <p class="app-desc">Design custom AI agents — a lawyer, analyst, or chef — with detailed system prompts, document uploads, and persistent multi‑turn context.</p>
+            <div class="app-links"><a href="https://apps.apple.com/us/app/agentic-bots/id6753194867" target="_blank" rel="noopener">View on App Store ↗</a></div>
+          </div>
+        </div>
+        <div class="app-card reveal">
+          <img class="app-icon" src="assets/icons/specter-ai.jpg" alt="Specter AI icon" loading="lazy">
+          <div class="app-body">
+            <div class="app-name-row"><h4>Specter AI</h4></div>
+            <span class="app-tagline">Legal AI advisor</span>
+            <p class="app-desc">Conversational legal explainer covering contract law, IP, and legal terminology, built to inform — not replace — a qualified attorney.</p>
+            <div class="app-links"><a href="https://apps.apple.com/us/app/specter-ai/id6747647831" target="_blank" rel="noopener">View on App Store ↗</a></div>
+          </div>
+        </div>
+        <div class="app-card reveal">
+          <img class="app-icon" src="assets/icons/thempo.jpg" alt="Thempo icon" loading="lazy">
+          <div class="app-body">
+            <div class="app-name-row"><h4>Thempo</h4></div>
+            <span class="app-tagline">AI luxury watch concierge</span>
+            <p class="app-desc">Discover, buy, and sell luxury watches through AI‑tailored recommendations, verified dealers, and concierge support for collectors.</p>
+            <div class="app-links"><a href="https://apps.apple.com/us/app/thempo/id6768465445" target="_blank" rel="noopener">View on App Store ↗</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="apps-sub reveal">
+        <h3>Android — Google Play</h3>
+        <a href="https://play.google.com/store/apps/developer?id=Ivan+F+Garcia" target="_blank" rel="noopener">All apps on Google Play ↗</a>
+      </div>
+      <div class="app-grid">
+        <div class="app-card reveal">
+          <img class="app-icon" src="assets/icons/agentic-pets-android.jpg" alt="Agentic Pets icon" loading="lazy">
+          <div class="app-body">
+            <div class="app-name-row"><h4>Agentic Pets</h4><span class="cross-chip">Also on iOS</span></div>
+            <span class="app-tagline">Identify breeds and check health with one photo</span>
+            <p class="app-desc">AI‑powered pet care: instant breed identification, general health indicators, and personalized recommendations from a single photo.</p>
+            <div class="app-links"><a href="https://play.google.com/store/apps/details?id=com.felipe.agenticpets" target="_blank" rel="noopener">View on Google Play ↗</a></div>
+          </div>
+        </div>
+        <div class="app-card reveal">
+          <img class="app-icon" src="assets/icons/agentic-bots-android.jpg" alt="Agentic Bots icon" loading="lazy">
+          <div class="app-body">
+            <div class="app-name-row"><h4>Agentic Bots</h4><span class="cross-chip">Also on iOS</span></div>
+            <span class="app-tagline">Your personal AI experts</span>
+            <p class="app-desc">Design custom AI agents — a lawyer, analyst, or chef — with detailed system prompts, document uploads, and persistent multi‑turn context.</p>
+            <div class="app-links"><a href="https://play.google.com/store/apps/details?id=com.agenticbots.agentic_bots" target="_blank" rel="noopener">View on Google Play ↗</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="archive">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Archive</h2>
+        <span class="section-num">05</span>
+      </div>
+      <div class="archive-grid">
+
+        <div class="archive-card reveal">
+          <div class="shot-frame">
+            <span class="shot-fallback">Astral Numerology<br>screenshot coming soon</span>
+            <img src="assets/screenshots/astral-numerology.png" alt="Astral Numerology app screens" loading="lazy" onerror="this.remove()">
+          </div>
+          <div>
+            <div class="archive-name-row"><h4 style="font-size:17px;">Astral Numerology</h4></div>
+            <div class="archive-meta">iOS · Archived · EN / ES / FR</div>
+            <p class="archive-desc">A numerology reading app that reveals personality traits from a name and birth date — simple readings covering astrology and tarot correspondences, fully localized in English, Spanish, and French.</p>
+          </div>
+        </div>
+
+        <div class="archive-card reveal">
+          <div class="shot-frame">
+            <span class="shot-fallback">Golera<br>screenshot coming soon</span>
+            <img src="assets/screenshots/golera.png" alt="Golera app screens" loading="lazy" onerror="this.remove()">
+          </div>
+          <div>
+            <div class="archive-name-row"><h4 style="font-size:17px;">Golera</h4></div>
+            <div class="archive-meta">iOS &amp; Android · Archived · Bogotá, Colombia</div>
+            <p class="archive-desc">Colombia's first amateur football league app. Build a team, book five‑a‑side pitches, run or join tournaments, challenge rival squads, and earn "Golera Points" redeemable for pitch discounts and promotions.</p>
+            <p class="archive-quote">"La primera app donde podrás sentirte como un verdadero futbolista."</p>
+          </div>
+        </div>
+
+        <div class="archive-card reveal">
+          <div class="shot-frame">
+            <span class="shot-fallback">Mercadoni<br>screenshot coming soon</span>
+            <img src="assets/screenshots/mercadoni.png" alt="Mercadoni app screens" loading="lazy" onerror="this.remove()">
+          </div>
+          <div>
+            <div class="archive-name-row"><h4 style="font-size:17px;">Mercadoni</h4></div>
+            <div class="archive-meta">iOS · 2015 – 2016 · Bogotá, Colombia</div>
+            <p class="archive-desc">Grocery shopping from your phone, built from scratch as the app's first iOS developer — Colombia and Mexico's answer to Instacart, later covered in the local tech press.</p>
+            <div class="archive-links"><a href="https://www.xataka.com.co/aplicaciones/mercadoni-es-la-nueva-plataforma-colombiana-para-hacer-mercado-desde-el-celular" target="_blank" rel="noopener">Press coverage — Xataka ↗</a></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Education &amp; Languages</h2>
+        <span class="section-num">06</span>
+      </div>
+      <div class="edu-grid">
+        <div class="reveal">
+          <div class="edu-item">
+            <div class="deg">MSc, Master of Software Engineering</div>
+            <div class="school">Universidad de los Andes, Bogotá</div>
+            <div class="when">Feb 2015 — Mar 2017</div>
+          </div>
+          <div class="edu-item">
+            <div class="deg">BS, Systems Engineering</div>
+            <div class="school">Pontificia Universidad Javeriana, Bogotá</div>
+            <div class="when">Jun 2009 — Jun 2014</div>
+          </div>
+          <div class="edu-item">
+            <div class="deg">Honor Award — "Reservatio"</div>
+            <div class="school">Thesis project: mobile booking platform for sports facilities</div>
+          </div>
+        </div>
+        <div class="lang-list reveal">
+          <div class="lang-row"><span>Spanish</span><span class="lang-level">Native</span></div>
+          <div class="lang-row"><span>English</span><span class="lang-level">Advanced</span></div>
+          <div class="lang-row"><span>French</span><span class="lang-level">Beginner</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="wrap">
+      <div class="footer-row reveal">
+        <div>
+          <h2>Let's talk.</h2>
+          <p>Open to Technical Director, architecture advisory, and AI‑in‑mobile speaking engagements.</p>
+        </div>
+        <div class="footer-meta">
+          <a href="mailto:ferguchito93@gmail.com">ferguchito93@gmail.com</a><br>
+          Miami, FL — © <span id="year"></span> Iván García
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  // Mobile nav toggle
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', function(){
+    var open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ navLinks.classList.remove('open'); });
+  });
+
+  // Theme toggle
+  var root = document.documentElement;
+  var themeToggle = document.getElementById('themeToggle');
+  var stored = null;
+  try { stored = localStorage.getItem('theme'); } catch(e){}
+  if (stored === 'light' || stored === 'dark') root.setAttribute('data-theme', stored);
+
+  function currentTheme(){
+    var attr = root.getAttribute('data-theme');
+    if (attr) return attr;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  themeToggle.addEventListener('click', function(){
+    var next = currentTheme() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch(e){}
+  });
+
+  // Scroll reveal
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
