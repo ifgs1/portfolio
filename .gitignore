@@ -1,0 +1,18 @@
+# Claude Code local session state (not meant to be shared/pushed)
+.claude/
+
+# OS files
+.DS_Store
+
+# Editor folders
+.vscode/
+.idea/
+
+# Environment / secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Logs
+*.log
