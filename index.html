@@ -165,6 +165,24 @@
     padding: 96px 0 80px;
     border-bottom: 1px solid var(--border);
   }
+  .hero-grid{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 56px;
+    align-items: start;
+  }
+  .hero-grid .fact-list{
+    min-width: 220px;
+    padding-top: 10px;
+  }
+  @media (max-width: 860px){
+    .hero-grid{ grid-template-columns: 1fr; }
+    .hero-grid .fact-list{
+      padding-top: 32px;
+      margin-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+  }
   .eyebrow{
     font-family: var(--font-mono);
     font-size: 13px;
@@ -241,14 +259,7 @@
   .reveal{ opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
   .reveal.in{ opacity: 1; transform: none; }
 
-  /* About */
-  .about-grid{
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 48px;
-  }
-  .about-grid p{ color: var(--text-muted); max-width: var(--measure); }
-  .about-grid p + p{ margin-top: 16px; }
+  /* Fact list (hero) */
   .fact-list{ display: flex; flex-direction: column; gap: 18px; }
   .fact{
     border-left: 2px solid var(--border);
@@ -263,10 +274,6 @@
     margin: 0 0 4px;
   }
   .fact dd{ margin: 0; font-size: 14.5px; }
-
-  @media (max-width: 780px){
-    .about-grid{ grid-template-columns: 1fr; }
-  }
 
   /* Experience timeline */
   .timeline{ display: flex; flex-direction: column; }
@@ -480,7 +487,6 @@
   <div class="wrap nav">
     <a href="#top" class="nav-mark">GARCIA<span>.</span>DEV</a>
     <nav class="nav-links" id="navLinks">
-      <a href="#about">About</a>
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
       <a href="#apps">Apps</a>
@@ -501,55 +507,43 @@
 <main id="top">
 
   <section class="hero">
-    <div class="wrap">
-      <span class="eyebrow reveal">MIAMI, FL — AVAILABLE FOR ADVISORY &amp; SPEAKING</span>
-      <h1 class="reveal">Iván García</h1>
-      <p class="role reveal">Hands On Technical Director, building native mobile experiences and applied‑AI products for 15+ years.</p>
-      <p class="lede reveal">Systems engineer with a master's in software engineering. I lead cross‑border engineering teams and translate executive vision into shipped platforms, most recently architecting LLM and knowledge‑graph solutions, on top of a decade of Mobile leadership.</p>
-      <div class="cta-row reveal">
-        <a class="btn btn-ios" href="https://apps.apple.com/do/developer/ivan-f-garcia-s/id847804685" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.365 1.43c0 1.14-.462 2.032-1.386 2.834-.99.87-2.037 1.36-3.14 1.264-.09-1.1.397-2.17 1.36-3.03.965-.85 2.05-1.35 3.166-1.418.02.117.03.234 0 .35zM20.6 17.24c-.457 1.05-.99 2.02-1.6 2.94-.84 1.26-1.53 2.13-2.06 2.62-.82.79-1.7 1.19-2.64 1.21-.68.02-1.5-.19-2.46-.63-.96-.44-1.84-.66-2.66-.66-.86 0-1.77.22-2.73.66-.97.44-1.75.67-2.35.69-.9.04-1.8-.37-2.7-1.22-.58-.53-1.31-1.44-2.18-2.72-.93-1.36-1.69-2.94-2.28-4.74-.63-1.93-.95-3.79-.95-5.6 0-2.07.45-3.86 1.34-5.35.7-1.2 1.63-2.15 2.8-2.84 1.16-.7 2.42-1.06 3.78-1.08.72 0 1.68.24 2.87.71 1.19.47 1.95.71 2.28.71.25 0 1.09-.28 2.51-.83 1.35-.51 2.48-.72 3.42-.64 2.53.2 4.43 1.2 5.7 3-2.26 1.37-3.38 3.28-3.36 5.73.02 1.9.7 3.49 2.03 4.75.6.58 1.28 1.03 2.02 1.35-.16.47-.34.93-.53 1.38z"/></svg>
-          iOS Portfolio
-        </a>
-        <a class="btn btn-android" href="https://play.google.com/store/apps/developer?id=Ivan+F+Garcia" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.7c-.35.35-.55.85-.55 1.4v15.8c0 .55.2 1.05.55 1.4l.1.08L13 12.1v-.2L3.7 2.62l-.1.08z"/><path d="M16.1 15.3l-3.1-3.1v-.2l3.1-3.1 3.5 2c1 .57 1 1.5 0 2.07l-3.5 2.33z" opacity=".85"/><path d="M16.1 8.9L12.9 12l3.2 3.1 3.5-2.33c1-.57 1-1.5 0-2.07L16.1 8.9z" opacity=".6"/><path d="M4 20.9c.3.16.7.13 1.1-.1l10.9-6.2-2.9-2.9L4 20.9z" opacity=".9"/></svg>
-          Android Portfolio
-        </a>
-        <a class="btn btn-ghost" href="#contact">Get in touch</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <h2>About</h2>
-        <span class="section-num">01</span>
-      </div>
-      <div class="about-grid">
-        <div class="reveal">
-          <p>Technical Director leading digital strategy for large accounts, overseeing different business units in Latin America, India, and the U.S.</p>
-          <p>Started as the first iOS developer on the account in 2017 and grew into architecture and technical leadership, most recently delivering AI‑powered pricing, recommendation, and innovation tooling built on LLMs and knowledge graphs.</p>
+    <div class="wrap hero-grid">
+      <div class="hero-main">
+        <span class="eyebrow reveal">MIAMI, FL — AVAILABLE FOR ADVISORY &amp; SPEAKING</span>
+        <h1 class="reveal">Iván García</h1>
+        <p class="role reveal">Hands On Technical Director, building native mobile experiences and applied‑AI products.</p>
+        <p class="lede reveal">Systems engineer with a master's in software engineering. I lead cross‑border engineering teams and translate executive vision into shipped platforms, most recently architecting LLM and knowledge‑graph solutions, on top of a decade of Mobile leadership.</p>
+        <p class="lede reveal">Technical Director leading digital strategy for large accounts, overseeing different business units in Latin America, India, and the U.S.</p>
+        <div class="cta-row reveal">
+          <a class="btn btn-ios" href="https://apps.apple.com/do/developer/ivan-f-garcia-s/id847804685" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.365 1.43c0 1.14-.462 2.032-1.386 2.834-.99.87-2.037 1.36-3.14 1.264-.09-1.1.397-2.17 1.36-3.03.965-.85 2.05-1.35 3.166-1.418.02.117.03.234 0 .35zM20.6 17.24c-.457 1.05-.99 2.02-1.6 2.94-.84 1.26-1.53 2.13-2.06 2.62-.82.79-1.7 1.19-2.64 1.21-.68.02-1.5-.19-2.46-.63-.96-.44-1.84-.66-2.66-.66-.86 0-1.77.22-2.73.66-.97.44-1.75.67-2.35.69-.9.04-1.8-.37-2.7-1.22-.58-.53-1.31-1.44-2.18-2.72-.93-1.36-1.69-2.94-2.28-4.74-.63-1.93-.95-3.79-.95-5.6 0-2.07.45-3.86 1.34-5.35.7-1.2 1.63-2.15 2.8-2.84 1.16-.7 2.42-1.06 3.78-1.08.72 0 1.68.24 2.87.71 1.19.47 1.95.71 2.28.71.25 0 1.09-.28 2.51-.83 1.35-.51 2.48-.72 3.42-.64 2.53.2 4.43 1.2 5.7 3-2.26 1.37-3.38 3.28-3.36 5.73.02 1.9.7 3.49 2.03 4.75.6.58 1.28 1.03 2.02 1.35-.16.47-.34.93-.53 1.38z"/></svg>
+            iOS Portfolio
+          </a>
+          <a class="btn btn-android" href="https://play.google.com/store/apps/developer?id=Ivan+F+Garcia" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.7c-.35.35-.55.85-.55 1.4v15.8c0 .55.2 1.05.55 1.4l.1.08L13 12.1v-.2L3.7 2.62l-.1.08z"/><path d="M16.1 15.3l-3.1-3.1v-.2l3.1-3.1 3.5 2c1 .57 1 1.5 0 2.07l-3.5 2.33z" opacity=".85"/><path d="M16.1 8.9L12.9 12l3.2 3.1 3.5-2.33c1-.57 1-1.5 0-2.07L16.1 8.9z" opacity=".6"/><path d="M4 20.9c.3.16.7.13 1.1-.1l10.9-6.2-2.9-2.9L4 20.9z" opacity=".9"/></svg>
+            Android Portfolio
+          </a>
+          <a class="btn btn-ghost" href="#contact">Get in touch</a>
         </div>
-        <dl class="fact-list reveal">
-          <div class="fact">
-            <dt>Experience</dt>
-            <dd>13+ years in software development</dd>
-          </div>
-          <div class="fact">
-            <dt>Focus</dt>
-            <dd>Mobile architecture, engineering leadership, applied AI</dd>
-          </div>
-          <div class="fact">
-            <dt>Education</dt>
-            <dd>MSc Software Engineering, Universidad de los Andes</dd>
-          </div>
-          <div class="fact">
-            <dt>Based in</dt>
-            <dd>Miami, FL</dd>
-          </div>
-        </dl>
       </div>
+      <dl class="fact-list reveal">
+        <div class="fact">
+          <dt>Experience</dt>
+          <dd>14+ years in software development</dd>
+        </div>
+        <div class="fact">
+          <dt>Focus</dt>
+          <dd>Mobile architecture, engineering leadership, applied AI</dd>
+        </div>
+        <div class="fact">
+          <dt>Education</dt>
+          <dd>MSc Software Engineering, Universidad de los Andes</dd>
+        </div>
+        <div class="fact">
+          <dt>Based in</dt>
+          <dd>Miami, FL</dd>
+        </div>
+      </dl>
     </div>
   </section>
 
@@ -557,7 +551,7 @@
     <div class="wrap">
       <div class="section-head reveal">
         <h2>Experience</h2>
-        <span class="section-num">02</span>
+        <span class="section-num">01</span>
       </div>
 
       <p class="tl-group-label reveal">Globant — Hospitality (Cruise Company)</p>
@@ -652,7 +646,7 @@
     <div class="wrap">
       <div class="section-head reveal">
         <h2>Skills</h2>
-        <span class="section-num">03</span>
+        <span class="section-num">02</span>
       </div>
       <div class="skill-groups">
         <div class="skill-group reveal">
@@ -687,7 +681,7 @@
     <div class="wrap">
       <div class="section-head reveal">
         <h2>Apps</h2>
-        <span class="section-num">04</span>
+        <span class="section-num">03</span>
       </div>
 
       <div class="apps-sub reveal">
@@ -773,7 +767,7 @@
     <div class="wrap">
       <div class="section-head reveal">
         <h2>Archive</h2>
-        <span class="section-num">05</span>
+        <span class="section-num">04</span>
       </div>
       <div class="archive-grid">
 
@@ -823,7 +817,7 @@
     <div class="wrap">
       <div class="section-head reveal">
         <h2>Education &amp; Languages</h2>
-        <span class="section-num">06</span>
+        <span class="section-num">05</span>
       </div>
       <div class="edu-grid">
         <div class="reveal">
@@ -850,21 +844,6 @@
       </div>
     </div>
   </section>
-
-  <footer id="contact">
-    <div class="wrap">
-      <div class="footer-row reveal">
-        <div>
-          <h2>Let's talk.</h2>
-          <p>Open to Technical Director, architecture advisory, and AI‑in‑mobile speaking engagements.</p>
-        </div>
-        <div class="footer-meta">
-          <a href="mailto:ferguchito93@gmail.com">ferguchito93@gmail.com</a><br>
-          Miami, FL — © <span id="year"></span> Iván García
-        </div>
-      </div>
-    </div>
-  </footer>
 
 </main>
 
